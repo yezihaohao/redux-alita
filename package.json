@@ -1,0 +1,42 @@
+{
+  "name": "redux-alita",
+  "version": "1.0.0",
+  "description": "a small and easy tool for react to do something with redux",
+  "homepage": "https://github.com/yezihaohao/redux-alita",
+  "repository": "github:yezihaohao/redux-alita",
+  "license": "MIT",
+  "keywords": [
+    "redux",
+    "reducer",
+    "state",
+    "react",
+    "react-redux"
+  ],
+  "main": "dist/redux-alita.cjs.js",
+  "module": "dist/redux-alita.esm.js",
+  "browser": "dist/redux-alita.umd.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "react": "^16.8.4",
+    "rollup": "^1.6.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-node-resolve": "^4.0.1"
+  },
+  "dependencies": {
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  }
+}
