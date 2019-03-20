@@ -13,6 +13,7 @@
 ### how to use?
 
 > [example for basic usage](https://github.com/yezihaohao/redux-alita/tree/master/example)
+
 > [project for normal usage](https://github.com/yezihaohao/react-admin)
 
 - yarn add redux-alita (npm i redux-alita)
