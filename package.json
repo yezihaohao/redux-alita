@@ -1,6 +1,6 @@
 {
   "name": "redux-alita",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a small and easy tool for react to do something with redux",
   "homepage": "https://github.com/yezihaohao/redux-alita",
   "repository": "github:yezihaohao/redux-alita",
@@ -35,7 +35,7 @@
     "rollup-plugin-node-resolve": "^4.0.1"
   },
   "dependencies": {
-    "react-redux": "^6.0.1",
+    "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   }

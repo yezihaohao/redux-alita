@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { connectAlita } from 'redux-alita';
 import FetchUsage from './FetchUsage';
+import HookTest from './HookTest';
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <span>count: { countNum }</span>
             <button onClick={() => this.props.setAlitaState({ stateName: 'count', data: countNum - 1 })}>count - 1</button>
           </div>
+          <HookTest />
           <FetchUsage />
         </header>
       </div>

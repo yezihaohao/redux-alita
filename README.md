@@ -18,7 +18,7 @@
 
 - yarn add redux-alita (npm i redux-alita)
 - add Provider to the root node
-- connect Component (default: the whole state will merge to the props)
+- connect Component (default: the whole state will merge to the props) or use hook apis
 - use redux data or set redux data
 - for fetch api data, make sure register functions config before use setAlitaState (see example for basic use)
 
@@ -35,12 +35,15 @@
     - funcName, params for asynchronous fetch apis
 - setConfig
     - register fetch functions before fetch usage
+- for hooks
+    - useAlitaState default return the whole state, extract data by passing data keys
+    - useAlitaCreator return function like setAlitaState above
 
 ### Returns
 
 ```
 {
-    someKey: {
+    someKey: { // default value {}
         isFetching: true || false,
         timeStamp,
         data        // data for your component to use

@@ -10,7 +10,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAlitaState } from '../action';
 
-const mapStateToProps = ({ alitaState }, alitaStateKeys) => {
+/**
+ * transform state common
+ * @param {*} alitaState
+ * @param {*} alitaStateKeys
+ */
+export function transformState(alitaState, alitaStateKeys) {
     // 默认返回整个数据对象
     if (!alitaStateKeys) return { alitaState };
     const _transferObj = {};
@@ -18,7 +23,8 @@ const mapStateToProps = ({ alitaState }, alitaStateKeys) => {
         alitaState[key] && (_transferObj[key] = alitaState[key]);
     })
     return { ..._transferObj };
-};
+}
+const mapStateToProps = ({ alitaState }, alitaStateKeys) => transformState(alitaState, alitaStateKeys);
 const mapDispatchToProps = dispatch => ({
     setAlitaState: bindActionCreators(setAlitaState, dispatch)
 });

@@ -9,7 +9,8 @@
 import AlitaProvider from './provider/Provider';
 import connectAlita from './utils';
 import { setAlitaState, setConfig } from './action';
+import { useAlitaCreator, useAlitaState } from './utils/hook';
 
 export {
-    AlitaProvider, connectAlita, setAlitaState, setConfig,
+    AlitaProvider, connectAlita, setAlitaState, setConfig, useAlitaCreator, useAlitaState
 }

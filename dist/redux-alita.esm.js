@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider as Provider$1, connect } from 'react-redux';
+import { Provider as Provider$1, connect, useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware, bindActionCreators } from 'redux';
 import thunk from 'redux-thunk';
 
@@ -127,8 +127,7 @@ var setAlitaState = function setAlitaState(_ref) {
   };
 };
 
-var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
-  var alitaState = _ref.alitaState;
+function transformState(alitaState, alitaStateKeys) {
   if (!alitaStateKeys) return {
     alitaState: alitaState
   };
@@ -137,6 +136,11 @@ var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
     alitaState[key] && (_transferObj[key] = alitaState[key]);
   });
   return _objectSpread({}, _transferObj);
+}
+
+var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
+  var alitaState = _ref.alitaState;
+  return transformState(alitaState, alitaStateKeys);
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -151,4 +155,15 @@ var index = (function (alitaStateKeys) {
   }, mapDispatchToProps);
 });
 
-export { Provider as AlitaProvider, index as connectAlita, setAlitaState, setConfig };
+function useAlitaCreator() {
+  var dispatch = useDispatch();
+  return bindActionCreators(setAlitaState, dispatch);
+}
+function useAlitaState(alitaStateKeys) {
+  return useSelector(function (_ref) {
+    var alitaState = _ref.alitaState;
+    return transformState(alitaState, alitaStateKeys);
+  }, shallowEqual);
+}
+
+export { Provider as AlitaProvider, index as connectAlita, setAlitaState, setConfig, useAlitaCreator, useAlitaState };

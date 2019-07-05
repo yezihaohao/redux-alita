@@ -131,8 +131,7 @@
     };
   };
 
-  var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
-    var alitaState = _ref.alitaState;
+  function transformState(alitaState, alitaStateKeys) {
     if (!alitaStateKeys) return {
       alitaState: alitaState
     };
@@ -141,6 +140,11 @@
       alitaState[key] && (_transferObj[key] = alitaState[key]);
     });
     return _objectSpread({}, _transferObj);
+  }
+
+  var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
+    var alitaState = _ref.alitaState;
+    return transformState(alitaState, alitaStateKeys);
   };
 
   var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -155,10 +159,23 @@
     }, mapDispatchToProps);
   });
 
+  function useAlitaCreator() {
+    var dispatch = reactRedux.useDispatch();
+    return redux.bindActionCreators(setAlitaState, dispatch);
+  }
+  function useAlitaState(alitaStateKeys) {
+    return reactRedux.useSelector(function (_ref) {
+      var alitaState = _ref.alitaState;
+      return transformState(alitaState, alitaStateKeys);
+    }, reactRedux.shallowEqual);
+  }
+
   exports.AlitaProvider = Provider;
   exports.connectAlita = index;
   exports.setAlitaState = setAlitaState;
   exports.setConfig = setConfig;
+  exports.useAlitaCreator = useAlitaCreator;
+  exports.useAlitaState = useAlitaState;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
