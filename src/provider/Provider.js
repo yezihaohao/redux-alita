@@ -16,8 +16,4 @@ import reducer from '../reducer';
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
 
-export default ({ children }) => (
-    <Provider store={store}>
-        { children }
-    </Provider>
-)
+export default ({ children }) => <Provider store={store}>{children}</Provider>;

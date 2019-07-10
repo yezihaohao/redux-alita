@@ -1,7 +1,4 @@
 {
-  "comments": false,
-  "presets": [
-    ["@babel/env", {"modules": false}],
-    ["@babel/preset-react"]
-  ]
+    "comments": false,
+    "presets": [["@babel/env", { "modules": false }], ["@babel/preset-react"]]
 }

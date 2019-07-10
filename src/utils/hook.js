@@ -24,5 +24,8 @@ export function useAlitaCreator() {
  * @param {*} alitaStateKeys keys - extract alita single data
  */
 export function useAlitaState(alitaStateKeys) {
-    return useSelector(({ alitaState }) => transformState(alitaState, alitaStateKeys), shallowEqual);
+    return useSelector(
+        ({ alitaState }) => transformState(alitaState, alitaStateKeys),
+        shallowEqual
+    );
 }

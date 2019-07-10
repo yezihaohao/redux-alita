@@ -30,7 +30,7 @@ const alitaState = (state = {}, action) => {
         case type.REQUEST_DATA:
             return {
                 ...state,
-                [action.category]: handleData(state[action.category], action)
+                [action.category]: handleData(state[action.category], action),
             };
         default:
             return { ...state };
@@ -38,5 +38,5 @@ const alitaState = (state = {}, action) => {
 };
 
 export default combineReducers({
-    alitaState
+    alitaState,
 });

@@ -13,16 +13,16 @@ let funcs;
  * 注册接口请求api函数
  * @param {*} apis
  */
-export const setConfig = apis => funcs = apis;
+export const setConfig = apis => (funcs = apis);
 
 const requestData = category => ({
     type: type.REQUEST_DATA,
-    category
+    category,
 });
 const receiveData = (data, category) => ({
     type: type.RECEIVE_DATA,
     data,
-    category
+    category,
 });
 /**
  * 请求数据调用方法

@@ -19,7 +19,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "node test/test.js",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "prettier": "prettier -c --write 'src/**/*.{js,ts,html,css}'"
   },
   "files": [
     "dist"
@@ -28,7 +29,7 @@
     "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
-    "react": "^16.8.4",
+    "prettier": "1.18.2",
     "rollup": "^1.6.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.2.1",
@@ -38,5 +39,8 @@
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
   }
 }

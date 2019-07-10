@@ -21,12 +21,17 @@ export function transformState(alitaState, alitaStateKeys) {
     const _transferObj = {};
     alitaStateKeys.forEach(key => {
         alitaState[key] && (_transferObj[key] = alitaState[key]);
-    })
+    });
     return { ..._transferObj };
 }
-const mapStateToProps = ({ alitaState }, alitaStateKeys) => transformState(alitaState, alitaStateKeys);
+const mapStateToProps = ({ alitaState }, alitaStateKeys) =>
+    transformState(alitaState, alitaStateKeys);
 const mapDispatchToProps = dispatch => ({
-    setAlitaState: bindActionCreators(setAlitaState, dispatch)
+    setAlitaState: bindActionCreators(setAlitaState, dispatch),
 });
 
-export default (alitaStateKeys) => connect(state => mapStateToProps(state, alitaStateKeys), mapDispatchToProps);
+export default alitaStateKeys =>
+    connect(
+        state => mapStateToProps(state, alitaStateKeys),
+        mapDispatchToProps
+    );
