@@ -21,6 +21,7 @@ export default [
 		external: [ 'react', 'redux', 'redux-thunk', 'react-redux' ],
 		plugins: [
 			babel({
+				babelrc: false,
 				exclude: 'node_modules/**', // 只编译我们的源代码
 			}),
 			resolve(),
@@ -45,6 +46,7 @@ export default [
 		external: [ 'react', 'redux', 'redux-thunk', 'react-redux' ],
 		plugins: [
 			babel({
+				babelrc: false,
 				exclude: 'node_modules/**', // 只编译我们的源代码
 			}),
 			resolve(),
