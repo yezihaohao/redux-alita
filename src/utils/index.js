@@ -9,6 +9,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setAlitaState } from '../action';
+import { initialState } from '../reducer';
 
 /**
  * transform state common
@@ -20,7 +21,16 @@ export function transformState(alitaState, alitaStateKeys) {
     if (!alitaStateKeys) return { alitaState };
     const _transferObj = {};
     alitaStateKeys.forEach(key => {
-        alitaState[key] && (_transferObj[key] = alitaState[key]);
+        if (Object.prototype.toString.call(key) === '[object String]') {
+            alitaState[key] && (_transferObj[key] = alitaState[key]);
+        }
+        if (Object.prototype.toString.call(key) === '[object Object]') {
+            const _realKey = Object.keys(key)[0];
+            const _initialVal = key[_realKey];
+            _transferObj[_realKey] = !alitaState[_realKey]
+                ? initialState({ isFetching: false, data: _initialVal })
+                : alitaState[_realKey];
+        }
     });
     return { ..._transferObj };
 }

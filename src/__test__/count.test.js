@@ -42,17 +42,30 @@ const Count = ({ setAlitaState, countState }) => {
     );
 };
 
-const ConnectCount = connectAlita(['countState'])(Count);
-
 // test normal case: change alita state
-test('test alita count change', () => {
+// test('test alita count change', () => {
+//     const ConnectCount = connectAlita(['countState'])(Count);
+//     const wrapper = mount(
+//         <AlitaProvider>
+//             <ConnectCount />
+//         </AlitaProvider>
+//     );
+
+//     expect(wrapper.find('#count').text()).toBe('the value of count: 0');
+//     wrapper.find('[type="plus"]').simulate('click');
+//     expect(wrapper.find('#count').text()).toBe('the value of count: 1');
+// });
+
+// test initial state
+test('test alita initial state', () => {
+    const ConnectCount = connectAlita([{ countState: 100 }])(Count);
     const wrapper = mount(
         <AlitaProvider>
             <ConnectCount />
         </AlitaProvider>
     );
 
-    expect(wrapper.find('#count').text()).toBe('the value of count: 0');
+    expect(wrapper.find('#count').text()).toBe('the value of count: 100');
     wrapper.find('[type="plus"]').simulate('click');
-    expect(wrapper.find('#count').text()).toBe('the value of count: 1');
+    expect(wrapper.find('#count').text()).toBe('the value of count: 101');
 });

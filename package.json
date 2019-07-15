@@ -19,7 +19,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
-    "prettier": "prettier -c --write 'src/**/*.{js,ts,html,css}'"
+    "prettier": "prettier -c --write \"src/**/*.{js,ts,html,css}\""
   },
   "files": [
     "dist"
