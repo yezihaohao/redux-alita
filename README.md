@@ -28,6 +28,7 @@
     - provider component for root node
 - connectAlita
     - connect function (just prepared mapStateToProps and mapDispatchToProps)
+    - [{ stateKey: initialValue }] - initialValue for initialStateKey
 - setAlitaState
     - set redux data fucntion (after connect, you can use it in props)
     - funcParams -> { funcName, params, stateName = funcName, data }
@@ -37,6 +38,7 @@
     - register fetch functions before fetch usage
 - for hooks
     - useAlitaState default return the whole state, extract data by passing data keys
+        - [stateKey] - stateKey without initialValue. [{ stateKey: initialValue }] - stateKey with initialValue
     - useAlitaCreator return function like setAlitaState above
 
 ### Returns
