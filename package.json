@@ -19,6 +19,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "jest",
+    "test:ci": "jest --coverage && codecov",
     "prettier": "prettier -c --write \"src/**/*.{js,ts,html,css}\""
   },
   "files": [
@@ -33,6 +34,7 @@
     "babel-jest": "^24.8.0",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "codecov": "^3.5.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.8.0",
