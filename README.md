@@ -1,4 +1,5 @@
 ## redux-alita
+![travis-ci](https://travis-ci.org/yezihaohao/redux-alita.svg?branch=master)
 
 #### a small and easy tool for react to do something with redux
 
@@ -15,6 +16,8 @@
 > [example for basic usage](https://github.com/yezihaohao/redux-alita/tree/master/example)
 
 > [project for normal usage](https://github.com/yezihaohao/react-admin)
+
+> [online-demo(have a try)](https://codesandbox.io/s/redux-alita-pmc0y)
 
 - yarn add redux-alita (npm i redux-alita)
 - add Provider to the root node
