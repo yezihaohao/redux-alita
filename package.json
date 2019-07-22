@@ -15,6 +15,7 @@
   "main": "dist/redux-alita.cjs.js",
   "module": "dist/redux-alita.esm.js",
   "browser": "dist/redux-alita.umd.js",
+  "types": "dist/redux-alita.d.ts",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
