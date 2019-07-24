@@ -16,7 +16,7 @@ export class AlitaProvider extends React.Component {}
  * connect component with redux
  * @param alitaStateKeys state keys extract from redux
  */
-export function connectAlita(alitaStateKeys: []): any;
+export function connectAlita(alitaStateKeys: (string | object)[]): any;
 
 /**
  * function set redux state
@@ -34,7 +34,7 @@ export function setConfig(apis: object): void;
  * set alita state in redux
  * @return setAlitaState function
  */
-export function useAlitaCreator(): () => void;
+export function useAlitaCreator(): (param: AlitaParam) => void;
 
 /**
  * get alita state from redux
@@ -47,4 +47,4 @@ export function useAlitaCreator(): () => void;
  * // default count is 0
  * const { count } = useAlitaState([{ count: 0 }]);
  */
-export function useAlitaState(): any;
+export function useAlitaState(param: (string | object)[]): any;
