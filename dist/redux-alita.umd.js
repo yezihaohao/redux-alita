@@ -4,7 +4,7 @@
   (global = global || self, factory(global.howLongUntilLunch = {}, global.React, global.reactRedux, global.redux, global.thunk));
 }(this, function (exports, React, reactRedux, redux, thunk) { 'use strict';
 
-  React = React && React.hasOwnProperty('default') ? React['default'] : React;
+  var React__default = 'default' in React ? React['default'] : React;
   thunk = thunk && thunk.hasOwnProperty('default') ? thunk['default'] : thunk;
 
   function _defineProperty(obj, key, value) {
@@ -129,7 +129,7 @@
   var store = redux.createStore(reducer, redux.applyMiddleware.apply(void 0, middleware));
   var Provider = (function (_ref) {
     var children = _ref.children;
-    return React.createElement(reactRedux.Provider, {
+    return React__default.createElement(reactRedux.Provider, {
       store: store
     }, children);
   });
@@ -253,7 +253,9 @@
 
   function useAlitaCreator() {
     var dispatch = reactRedux.useDispatch();
-    return redux.bindActionCreators(setAlitaState, dispatch);
+    return React.useCallback(function (data) {
+      return redux.bindActionCreators(setAlitaState.bind(null, data), dispatch);
+    }, [dispatch]);
   }
   /**
    * get alita state from redux

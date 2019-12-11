@@ -34,7 +34,7 @@ export function setConfig(apis: object): void;
  * set alita state in redux
  * @return setAlitaState function
  */
-export function useAlitaCreator(): (param: AlitaParam) => void;
+export function useAlitaCreator(): (param: AlitaParam) => any;
 
 /**
  * get alita state from redux

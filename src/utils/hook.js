@@ -6,6 +6,7 @@
  * ------
  * Copyright 2019 - present, karakal
  */
+import { useCallback } from 'react';
 import { bindActionCreators } from 'redux';
 import { useDispatch, shallowEqual, useSelector } from 'react-redux';
 import { setAlitaState } from '../action';
@@ -16,7 +17,12 @@ import { transformState } from '.';
  */
 export function useAlitaCreator() {
     const dispatch = useDispatch();
-    return bindActionCreators(setAlitaState, dispatch);
+    return useCallback(
+        data => {
+            return bindActionCreators(setAlitaState.bind(null, data), dispatch);
+        },
+        [dispatch]
+    );
 }
 
 /**

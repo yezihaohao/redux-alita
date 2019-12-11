@@ -4,7 +4,8 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var React = _interopDefault(require('react'));
+var React = require('react');
+var React__default = _interopDefault(React);
 var reactRedux = require('react-redux');
 var redux = require('redux');
 var thunk = _interopDefault(require('redux-thunk'));
@@ -131,7 +132,7 @@ var middleware = [thunk];
 var store = redux.createStore(reducer, redux.applyMiddleware.apply(void 0, middleware));
 var Provider = (function (_ref) {
   var children = _ref.children;
-  return React.createElement(reactRedux.Provider, {
+  return React__default.createElement(reactRedux.Provider, {
     store: store
   }, children);
 });
@@ -255,7 +256,9 @@ var index = (function (alitaStateKeys) {
 
 function useAlitaCreator() {
   var dispatch = reactRedux.useDispatch();
-  return redux.bindActionCreators(setAlitaState, dispatch);
+  return React.useCallback(function (data) {
+    return redux.bindActionCreators(setAlitaState.bind(null, data), dispatch);
+  }, [dispatch]);
 }
 /**
  * get alita state from redux

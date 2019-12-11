@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Provider as Provider$1, connect, useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { combineReducers, createStore, applyMiddleware, bindActionCreators } from 'redux';
 import thunk from 'redux-thunk';
@@ -249,7 +249,9 @@ var index = (function (alitaStateKeys) {
 
 function useAlitaCreator() {
   var dispatch = useDispatch();
-  return bindActionCreators(setAlitaState, dispatch);
+  return useCallback(function (data) {
+    return bindActionCreators(setAlitaState.bind(null, data), dispatch);
+  }, [dispatch]);
 }
 /**
  * get alita state from redux
