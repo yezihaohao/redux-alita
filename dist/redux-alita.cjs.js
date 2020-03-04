@@ -257,7 +257,7 @@ var index = (function (alitaStateKeys) {
 function useAlitaCreator() {
   var dispatch = reactRedux.useDispatch();
   return React.useCallback(function (data) {
-    return redux.bindActionCreators(setAlitaState.bind(null, data), dispatch);
+    return redux.bindActionCreators(setAlitaState.bind(null, data), dispatch)();
   }, [dispatch]);
 }
 /**

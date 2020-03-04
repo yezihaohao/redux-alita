@@ -19,7 +19,7 @@ export function useAlitaCreator() {
     const dispatch = useDispatch();
     return useCallback(
         data => {
-            return bindActionCreators(setAlitaState.bind(null, data), dispatch);
+            return bindActionCreators(setAlitaState.bind(null, data), dispatch)();
         },
         [dispatch]
     );

@@ -250,7 +250,7 @@ var index = (function (alitaStateKeys) {
 function useAlitaCreator() {
   var dispatch = useDispatch();
   return useCallback(function (data) {
-    return bindActionCreators(setAlitaState.bind(null, data), dispatch);
+    return bindActionCreators(setAlitaState.bind(null, data), dispatch)();
   }, [dispatch]);
 }
 /**
