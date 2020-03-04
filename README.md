@@ -13,7 +13,7 @@
 
 ### how to use?
 
-> [example for basic usage](https://github.com/yezihaohao/redux-alita/tree/master/example)
+> [example for basic usage](https://github.com/yezihaohao/redux-alita/tree/master/story)
 
 > [project for normal usage](https://github.com/yezihaohao/react-admin)
 
@@ -45,7 +45,7 @@
     - useAlitaCreator return function like setAlitaState above(update: add useCallback to prevent infinite loop in useEffect)
         ```
         const setAlitaState = useAlitaCreator();
-        setAlitaState({ stateName: 'test', data: 'hello' })();
+        setAlitaState({ stateName: 'test', data: 'hello' });
         ```
 
 ### Returns
