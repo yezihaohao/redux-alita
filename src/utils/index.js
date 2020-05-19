@@ -34,6 +34,20 @@ export function transformState(alitaState, alitaStateKeys) {
     });
     return { ..._transferObj };
 }
+
+/**
+ * 返回简洁的对象
+ * @param {*} alitaState
+ * @param {*} alitaStateKeys
+ */
+export function transformStateLight(alitaState, alitaStateKeys) {
+    const state = transformState(alitaState, alitaStateKeys);
+    return Object.keys(state).reduce((prev, curr) => {
+        prev = { ...prev, [curr]: state[curr].data };
+        return prev;
+    }, {});
+}
+
 const mapStateToProps = ({ alitaState }, alitaStateKeys) =>
     transformState(alitaState, alitaStateKeys);
 const mapDispatchToProps = dispatch => ({

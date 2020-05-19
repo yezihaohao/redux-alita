@@ -1,6 +1,6 @@
 {
   "name": "redux-alita",
-  "version": "2.1.5",
+  "version": "2.2.0",
   "description": "a small and easy tool for react to do something with redux",
   "homepage": "https://github.com/yezihaohao/redux-alita",
   "repository": "github:yezihaohao/redux-alita",

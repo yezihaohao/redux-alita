@@ -263,6 +263,9 @@ function useAlitaCreator() {
 /**
  * get alita state from redux
  * @param {*} alitaStateKeys keys - extract alita single data
+ * @example
+ * eg: const { alita } = useAlitaState([{ alita: '测试' }]);
+ * alita = { isFetching: false, data: '测试', timeStamp: xxx }
  */
 
 function useAlitaState(alitaStateKeys) {

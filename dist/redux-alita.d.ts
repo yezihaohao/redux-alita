@@ -48,3 +48,12 @@ export function useAlitaCreator(): (param: AlitaParam) => any;
  * const { count } = useAlitaState([{ count: 0 }]);
  */
 export function useAlitaState(param: (string | object)[]): any;
+
+/**
+ * 获取简洁的alita对象
+ * @param {*} alitaStateKeys
+ * @example
+ * eg: const { alita } = useAlitaStateLight([{ alita: '测试' }]);
+ * alita = '测试'
+ */
+export function useAlitaStateLight(param: (string | object)[]): any;

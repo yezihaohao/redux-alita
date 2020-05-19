@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { Button } from '@storybook/react/demo';
-import { AlitaProvider, useAlitaCreator, useAlitaState } from '../src/main';
+import { AlitaProvider, useAlitaCreator, useAlitaState } from '../dist/redux-alita.esm';
+import { useAlitaStateLight } from '../src/utils/hook';
 
 export default {
-    title: 'Button',
+    title: 'Alita',
 };
 
 const Alita = () => {
@@ -31,6 +32,25 @@ export const testAlita = () => {
     return (
         <AlitaProvider>
             <Alita />
+        </AlitaProvider>
+    );
+};
+
+const Light = () => {
+    let { alita } = useAlitaStateLight([{ alita: 0 }]);
+    const setAlitaState = useAlitaCreator();
+    return (
+        <>
+            <Button onClick={() => setAlitaState({ stateName: 'alita', data: ++alita })}>+1</Button>
+            <Button onClick={() => setAlitaState({ stateName: 'alita', data: --alita })}>-1</Button>
+            <div>alita-count：{alita}</div>
+        </>
+    );
+};
+export const testAlitaLight = () => {
+    return (
+        <AlitaProvider>
+            <Light />
         </AlitaProvider>
     );
 };
