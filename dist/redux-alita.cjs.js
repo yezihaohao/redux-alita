@@ -25,20 +25,35 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _objectSpread(target) {
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
 
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
     }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
   }
 
   return target;
@@ -85,19 +100,19 @@ var handleData = function handleData() {
 
   switch (action.type) {
     case REQUEST_DATA:
-      return _objectSpread({}, state, {
+      return _objectSpread2(_objectSpread2({}, state), {}, {
         isFetching: true
       });
 
     case RECEIVE_DATA:
-      return _objectSpread({}, state, {
+      return _objectSpread2(_objectSpread2({}, state), {}, {
         isFetching: false,
         data: action.data,
         timeStamp: Date.now()
       });
 
     default:
-      return _objectSpread({}, state);
+      return _objectSpread2({}, state);
   }
 };
 
@@ -108,10 +123,10 @@ var alitaState = function alitaState() {
   switch (action.type) {
     case RECEIVE_DATA:
     case REQUEST_DATA:
-      return _objectSpread({}, state, _defineProperty({}, action.category, handleData(state[action.category], action)));
+      return _objectSpread2(_objectSpread2({}, state), {}, _defineProperty({}, action.category, handleData(state[action.category], action)));
 
     default:
-      return _objectSpread({}, state);
+      return _objectSpread2({}, state);
   }
 };
 
@@ -132,7 +147,7 @@ var middleware = [thunk];
 var store = redux.createStore(reducer, redux.applyMiddleware.apply(void 0, middleware));
 var Provider = (function (_ref) {
   var children = _ref.children;
-  return React__default.createElement(reactRedux.Provider, {
+  return /*#__PURE__*/React__default.createElement(reactRedux.Provider, {
     store: store
   }, children);
 });
@@ -222,7 +237,20 @@ function transformState(alitaState, alitaStateKeys) {
       }) : alitaState[_realKey];
     }
   });
-  return _objectSpread({}, _transferObj);
+  return _objectSpread2({}, _transferObj);
+}
+/**
+ * 返回简洁的对象
+ * @param {*} alitaState
+ * @param {*} alitaStateKeys
+ */
+
+function transformStateLight(alitaState, alitaStateKeys) {
+  var state = transformState(alitaState, alitaStateKeys);
+  return Object.keys(state).reduce(function (prev, curr) {
+    prev = _objectSpread2(_objectSpread2({}, prev), {}, _defineProperty({}, curr, state[curr].data));
+    return prev;
+  }, {});
 }
 
 var mapStateToProps = function mapStateToProps(_ref, alitaStateKeys) {
@@ -274,15 +302,20 @@ function useAlitaState(alitaStateKeys) {
     return transformState(alitaState, alitaStateKeys);
   }, reactRedux.shallowEqual);
 }
-
-/*
- * File: main.js
- * Desc: 入口文件
- * File Created: 2019-03-17 15:20:38
- * Author: chenghao
- * ------
- * Copyright 2019 - present, chenghao
+/**
+ * 获取简洁的alita对象
+ * @param {*} alitaStateKeys
+ * @example
+ * eg: const { alita } = useAlitaStateLight([{ alita: '测试' }]);
+ * alita = '测试'
  */
+
+function useAlitaStateLight(alitaStateKeys) {
+  return reactRedux.useSelector(function (_ref2) {
+    var alitaState = _ref2.alitaState;
+    return transformStateLight(alitaState, alitaStateKeys);
+  }, reactRedux.shallowEqual);
+}
 
 exports.AlitaProvider = Provider;
 exports.connectAlita = index;
@@ -290,3 +323,4 @@ exports.setAlitaState = setAlitaState;
 exports.setConfig = setConfig;
 exports.useAlitaCreator = useAlitaCreator;
 exports.useAlitaState = useAlitaState;
+exports.useAlitaStateLight = useAlitaStateLight;
