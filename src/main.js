@@ -9,7 +9,7 @@
 import AlitaProvider from './provider/Provider';
 import connectAlita from './utils';
 import { setAlitaState, setConfig } from './action';
-import { useAlitaCreator, useAlitaState, useAlitaStateLight } from './utils/hook';
+import { useAlitaCreator, useAlitaState, useAlitaStateLight, useAlita } from './utils/hook';
 
 export {
     AlitaProvider,
@@ -19,4 +19,5 @@ export {
     useAlitaCreator,
     useAlitaState,
     useAlitaStateLight,
+    useAlita
 };

@@ -52,6 +52,39 @@ function _objectSpread2(target) {
   return target;
 }
 
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
 /*
  * File: type.js
  * Desc: 描述
@@ -218,7 +251,11 @@ function transformState(alitaState, alitaStateKeys) {
   var _transferObj = {};
   alitaStateKeys.forEach(function (key) {
     if (Object.prototype.toString.call(key) === '[object String]') {
-      alitaState[key] && (_transferObj[key] = alitaState[key]);
+      // alitaState[key] && (_transferObj[key] = alitaState[key]);
+      _transferObj[key] = alitaState[key] || {
+        isFetching: false,
+        data: void 0
+      };
     }
 
     if (Object.prototype.toString.call(key) === '[object Object]') {
@@ -263,14 +300,6 @@ var index = (function (alitaStateKeys) {
   }, mapDispatchToProps);
 });
 
-/*
- * File: hook.js
- * Desc: hook api
- * File Created: 2019-07-05 09:41:10
- * Author: chenghao at <hao.cheng@karakal.com.cn>
- * ------
- * Copyright 2019 - present, karakal
- */
 /**
  * alitaCreator - set alita state
  */
@@ -309,5 +338,39 @@ function useAlitaStateLight(alitaStateKeys) {
     return transformStateLight(alitaState, alitaStateKeys);
   }, shallowEqual);
 }
+/**
+ * 校验options
+ * @param {*} options
+ */
 
-export { Provider as AlitaProvider, index as connectAlita, setAlitaState, setConfig, useAlitaCreator, useAlitaState, useAlitaStateLight };
+function validateOptions(options) {
+  var keys = ['light'];
+  return keys.some(function (key) {
+    return options.hasOwnProperty(key);
+  });
+}
+/**
+ *
+ * @param  {...any} args
+ * @example
+ * args 可以传两个参数
+ * 1
+ */
+
+
+function useAlita() {
+  for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  var options = args.slice(args.length - 1)[0];
+  options = validateOptions(options) ? options : null;
+  var stateKeys = options ? args.slice(0, args.length - 1) : args;
+  var setAlita = useAlitaCreator();
+  var alitaState = options && options.light ? useAlitaStateLight(stateKeys) : useAlitaState(stateKeys);
+  return [].concat(_toConsumableArray(Object.keys(alitaState).map(function (key) {
+    return alitaState[key];
+  })), [setAlita]);
+}
+
+export { Provider as AlitaProvider, index as connectAlita, setAlitaState, setConfig, useAlita, useAlitaCreator, useAlitaState, useAlitaStateLight };

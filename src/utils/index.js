@@ -22,7 +22,8 @@ export function transformState(alitaState, alitaStateKeys) {
     const _transferObj = {};
     alitaStateKeys.forEach(key => {
         if (Object.prototype.toString.call(key) === '[object String]') {
-            alitaState[key] && (_transferObj[key] = alitaState[key]);
+            // alitaState[key] && (_transferObj[key] = alitaState[key]);
+            _transferObj[key] = alitaState[key] || { isFetching: false, data: void 0 };
         }
         if (Object.prototype.toString.call(key) === '[object Object]') {
             const _realKey = Object.keys(key)[0];

@@ -1,61 +1,74 @@
-## redux-alita
-![travis-ci](https://travis-ci.org/yezihaohao/redux-alita.svg?branch=master)
+## 什么是redux-alita?
 
-#### a small and easy tool for react to do something with redux
+redux-alita是一个封装了react + redux 操作的极简的工具插件，你可以用它来提升日常的开发效率。
 
-### what's inside?
+为什么叫alita？以前我看过一部电影，叫alita，挺好看的，本插件和她的特点一样，精致，迅捷，简单，（开发）速度快。
 
-#### just one reducer, one action operator and one prepared Provider for root node.
+## 为什么会存在redux-alita?
 
-### why use it?
+### 一般的redux的使用是怎么样的？
 
-#### well... it's really tiny, you don't have to care about what's reducer like, how to make actions, what about asynchronous datas and others. just one function to set redux state with asynchronous or synchronous datas, just one function for everything.I think it's enough for normal project, at least, it's enough for me...
+![redux](./doc/redux.png)
 
-### how to use?
+action是什么？reducer是什么？dispatch又是什么？等等。。。
 
-> [example for basic usage](https://github.com/yezihaohao/redux-alita/tree/master/story)
+![问号](./doc/q.jpg)
 
-> [project for normal usage](https://github.com/yezihaohao/react-admin)
+### redux-alita的使用是怎么样的？
 
-> [online-demo(have a try)](https://codesandbox.io/s/redux-alita-pmc0y)
+![alita](./doc/alita.png)
 
-- yarn add redux-alita (npm i redux-alita)
-- add Provider to the root node
-- connect Component (default: the whole state will merge to the props) or use hook apis
-- use redux data or set redux data
-- for fetch api data, make sure register functions config before use setAlitaState (see example for basic use)
+OK,现在你只需要记住useAlita和AlitaProvider即可。
 
-### Apis
+![wow](./doc/wow.gif)
 
-- AlitaProvider
-    - provider component for root node
-- connectAlita
-    - connect function (just prepared mapStateToProps and mapDispatchToProps)
-    - [{ stateKey: initialValue }] - initialValue for initialStateKey
-- setAlitaState
-    - set redux data fucntion (after connect, you can use it in props)
-    - funcParams -> { funcName, params, stateName = funcName, data }
-    - only stateName and data for synchronous datas
-    - funcName, params for asynchronous fetch apis
-- setConfig
-    - register fetch functions before fetch usage
-- for hooks
-    - useAlitaState default return the whole state, extract data by passing data keys
-        - [stateKey] - stateKey without initialValue. [{ stateKey: initialValue }] - stateKey with initialValue
-    - useAlitaCreator return function like setAlitaState above(update: add useCallback to prevent infinite loop in useEffect)
-        ```
-        const setAlitaState = useAlitaCreator();
-        setAlitaState({ stateName: 'test', data: 'hello' });
-        ```
+## 快速达到目的
 
-### Returns
+我在项目中想达到的目的是什么？是能够简单的操作state数据，而这个state数据能够在所有的组件之间传递。用了alita，你不需要关心action是什么，reducer是什么，怎么样去触发action，还有异步数据怎么操作等等。
 
+你只需要知道，我有这么一个工具，和普通setState用法一致的工具，我用这个工具创建的state，可以在容器下面的任何组件之前传递。
+
+组件之间的通信交流：
+
+![c](./doc/c.png)
+
+## 如何使用？
+
+> 重点关注hooks的用法
+
+- 安装redux-alita: yarn add redux-alita 或者 npm i redux-alita
+- 引入AlitaProvider包裹根组件
+```js
+import { AlitaProvider } from 'redux-alita';
+
+<AlitaProvider>
+    <App />
+</AlitaProvider>
 ```
-{
-    someKey: { // default value {}
-        isFetching: true || false,
-        timeStamp,
-        data        // data for your component to use
-    }
+- 函数组件中使用
+```js
+import { useAlita } from 'redux-alita';
+function App() {
+    let [count = 0, setAlita] = useAlita('count', { light: true });
+    return (
+        <div>
+            <a onClick={() => setAlita({ stateName: 'count', data: ++count })}>+</a>
+             <a onClick={() => setAlita({ stateName: 'count', data: --count })}></a>
+             <div>count:{count}</div>
+        </div>
+    )
 }
 ```
+
+## API
+|API名称|描述|
+|---|---|
+|AlitaProvider|绑定redux到react(react-redux Provider的封装)
+|useAlita|获取state和stateState的hook api，参数可以传多个，最后一个参数可以用来设置option（对象，{light: true}, light设置true表示直接获取state的值，不设置的话获取的值将被{isFetching: xxx, data: xxx}包裹）。其他都是state的相关参数，例如：useAlita('count', { name: 'yezihaohao' })，直接传字符串表示不设置默认值，获取到的值为undefined，传对象{key: value}，value为对应state的默认值。
+
+## 在线demo
+
+
+## 结尾
+
+未完待续~

@@ -1,6 +1,6 @@
 {
   "name": "redux-alita",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "a small and easy tool for react to do something with redux",
   "homepage": "https://github.com/yezihaohao/redux-alita",
   "repository": "github:yezihaohao/redux-alita",
@@ -22,7 +22,8 @@
     "test": "jest",
     "test:ci": "jest --coverage && codecov",
     "prettier": "prettier -c --write \"src/**/*.{js,ts,html,css}\"",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "build-storybook": "build-storybook"
   },
   "files": [
     "dist"
@@ -32,6 +33,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/react": "^5.3.19",
     "@testing-library/react": "^8.0.4",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.6",
@@ -51,7 +53,6 @@
     "rollup-plugin-node-resolve": "^4.0.1"
   },
   "dependencies": {
-    "@storybook/react": "^5.3.14",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"

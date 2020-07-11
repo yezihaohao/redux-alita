@@ -57,3 +57,14 @@ export function useAlitaState(param: (string | object)[]): any;
  * alita = '测试'
  */
 export function useAlitaStateLight(param: (string | object)[]): any;
+
+/**
+ * 获取alita state 和 stateAlita
+ * @param {*} args
+ * @example
+ * const [count, setAlita] = useAlita({ count: 0 }, { light: true })
+ * count = 0，0是初始值
+ * setAlita = function，setAlita用来设置alita-state
+ * setAlita({ stateName: 'count', data: ++count });
+ */
+export function useAlita(...args: any): any;

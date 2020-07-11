@@ -52,3 +52,29 @@ export function useAlitaStateLight(alitaStateKeys) {
         shallowEqual
     );
 }
+
+/**
+ * 校验options
+ * @param {*} options
+ */
+function validateOptions(options) {
+    const keys = ['light'];
+    return keys.some(key => options.hasOwnProperty(key));
+}
+
+/**
+ *
+ * @param  {...any} args
+ * @example
+ * args 可以传两个参数
+ * 1
+ */
+export function useAlita(...args) {
+    let options = args.slice(args.length - 1)[0];
+    options = validateOptions(options) ? options : null;
+    const stateKeys = options ? args.slice(0, args.length - 1) : args;
+    const setAlita = useAlitaCreator();
+    const alitaState =
+        options && options.light ? useAlitaStateLight(stateKeys) : useAlitaState(stateKeys);
+    return [...Object.keys(alitaState).map(key => alitaState[key]), setAlita];
+}
