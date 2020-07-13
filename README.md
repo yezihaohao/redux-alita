@@ -68,6 +68,9 @@ function App() {
 
 ## 在线demo
 
+[在线示例，可尝试自己编辑](https://codesandbox.io/s/redux-alita-pmc0y?file=/src/index.tsx)
+
+[实战示例-react-admin](https://github.com/react-better/react-admin)
 
 ## 结尾
 
