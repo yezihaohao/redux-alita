@@ -3,6 +3,22 @@ import { Provider as Provider$1, connect, useDispatch, useSelector, shallowEqual
 import { combineReducers, createStore, applyMiddleware, bindActionCreators } from 'redux';
 import thunk from 'redux-thunk';
 
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -178,14 +194,6 @@ var Provider = (function (_ref) {
   }, children);
 });
 
-/*
- * File: index.js
- * Desc: redux actions
- * File Created: 2019-03-18 00:25:41
- * Author: chenghao
- * ------
- * Copyright 2019 - present, chenghao
- */
 var funcs;
 /**
  * 注册接口请求api函数
@@ -212,22 +220,38 @@ var receiveData = function receiveData(data, category) {
 };
 /**
  * 请求数据调用方法
+ * @param option1 以下對象
  * @param funcName      请求接口的函数名
  * @param params        请求接口的参数
  * @param stateName     state的名称
  * @param data          非异步请求时state的值
+ * @param option2 非异步请求时state的值
+ *
  * stateName 为空时，默认设置为api函数的名称
  */
 
 
-var setAlitaState = function setAlitaState(_ref) {
-  var funcName = _ref.funcName,
-      params = _ref.params,
-      _ref$stateName = _ref.stateName,
-      stateName = _ref$stateName === void 0 ? funcName : _ref$stateName,
-      data = _ref.data;
+var setAlitaState = function setAlitaState(option1, option2) {
   return function (dispatch) {
-    // 非异步请求的处理
+    var funcName, params, stateName, data;
+
+    if (_typeof(option1) === 'object') {
+      funcName = option1.funcName;
+      params = option1.params;
+      var _option1$stateName = option1.stateName;
+      stateName = _option1$stateName === void 0 ? funcName : _option1$stateName;
+      data = option1.data;
+    }
+
+    if (typeof option1 === 'string') {
+      stateName = option1;
+    }
+
+    if (option2) {
+      data = option2;
+    } // 非异步请求的处理
+
+
     if (!funcName && stateName) return dispatch(receiveData(data, stateName)); // 异步请求的处理
 
     dispatch(requestData(stateName));
@@ -306,8 +330,8 @@ var index = (function (alitaStateKeys) {
 
 function useAlitaCreator() {
   var dispatch = useDispatch();
-  return useCallback(function (data) {
-    return bindActionCreators(setAlitaState.bind(null, data), dispatch)();
+  return useCallback(function (data, state) {
+    return bindActionCreators(setAlitaState.bind(null, data, state), dispatch)();
   }, [dispatch]);
 }
 /**

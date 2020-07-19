@@ -2,7 +2,7 @@
 
 redux-alita是一个封装了react + redux 操作的极简的工具插件，你可以用它来提升日常的开发效率。
 
-为什么叫alita？以前我看过一部电影，叫alita，挺好看的，本插件和她的特点一样，精致，迅捷，简单，（开发）速度快。
+为什么叫alita？卡导的《Alita》得名。本插件和她的特点一样，精致，迅捷，简单，（开发）速度快。
 
 ## 为什么会存在redux-alita?
 
@@ -65,6 +65,7 @@ function App() {
 |---|---|
 |AlitaProvider|绑定redux到react(react-redux Provider的封装)
 |useAlita|获取state和stateState的hook api，参数可以传多个，最后一个参数可以用来设置option（对象，{light: true}, light设置true表示直接获取state的值，不设置的话获取的值将被{isFetching: xxx, data: xxx}包裹）。其他都是state的相关参数，例如：useAlita('count', { name: 'yezihaohao' })，直接传字符串表示不设置默认值，获取到的值为undefined，传对象{key: value}，value为对应state的默认值。
+|setAlita|useAlita返回的函数，设置alita state，用法见上面demo。参数形式1-一个参数：({ stateName: xxx, data: xxx });参数形式2-两个参数：(stateName, data);
 
 ## 在线demo
 

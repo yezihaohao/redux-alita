@@ -69,7 +69,7 @@ const UseAlita = () => {
             <div>test：{test}</div>
             <div>
                 {name}
-                <Button onClick={() => setAlita({ stateName: 'name', data: 'yezihaohao' })}>
+                <Button onClick={() => setAlita('name', 'yezihaohao')}>
                     获取名字
                 </Button>
             </div>

@@ -26,13 +26,26 @@ const receiveData = (data, category) => ({
 });
 /**
  * 请求数据调用方法
+ * @param option1 以下對象
  * @param funcName      请求接口的函数名
  * @param params        请求接口的参数
  * @param stateName     state的名称
  * @param data          非异步请求时state的值
+ * @param option2 非异步请求时state的值
+ *
  * stateName 为空时，默认设置为api函数的名称
  */
-export const setAlitaState = ({ funcName, params, stateName = funcName, data }) => dispatch => {
+export const setAlitaState = (option1, option2) => dispatch => {
+    let funcName, params, stateName, data;
+    if (typeof option1 === 'object') {
+        ({ funcName, params, stateName = funcName, data } = option1);
+    }
+    if (typeof option1 === 'string') {
+        stateName = option1;
+    }
+    if (option2) {
+        data = option2;
+    }
     // 非异步请求的处理
     if (!funcName && stateName) return dispatch(receiveData(data, stateName));
     // 异步请求的处理

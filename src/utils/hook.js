@@ -18,8 +18,8 @@ import { transformState, transformStateLight } from '.';
 export function useAlitaCreator() {
     const dispatch = useDispatch();
     return useCallback(
-        data => {
-            return bindActionCreators(setAlitaState.bind(null, data), dispatch)();
+        (data, state) => {
+            return bindActionCreators(setAlitaState.bind(null, data, state), dispatch)();
         },
         [dispatch]
     );
