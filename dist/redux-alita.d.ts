@@ -58,6 +58,22 @@ export function useAlitaState(param: (string | object)[]): any;
  */
 export function useAlitaStateLight(param: (string | object)[]): any;
 
+type A = any;
+interface ISetAlita {
+    /**
+     * @param args  `{ funcName, stateName, data, params }`
+     * @param stateName state的key
+     * @param data state的value
+     */
+    (args: AlitaParam): any;
+}
+interface ISetAlita {
+    /**
+     * @param key state的key
+     * @param data state的value
+     */
+    (key: string, data: any): any
+}
 /**
  * 获取alita state 和 stateAlita
  * @param {*} args
@@ -66,5 +82,10 @@ export function useAlitaStateLight(param: (string | object)[]): any;
  * count = 0，0是初始值
  * setAlita = function，setAlita用来设置alita-state
  * setAlita({ stateName: 'count', data: ++count });
+ * 或者 setAlita('count', ++count);
  */
-export function useAlita(...args: any): any;
+export function useAlita<T extends A[]>(
+    ...args: any
+): [...T, ISetAlita];
+export function useAlita<T extends A[]>(...args: any): [...T, ISetAlita];
+
